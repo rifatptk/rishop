@@ -1,12 +1,11 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
 
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
+  { name: "Home", href: "/", current: true },
+  { name: "Products", href: "/products", current: false },
 ];
 
 function classNames(...classes) {
@@ -14,6 +13,7 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
+  const [currentPage, setcurrentPage] = useState(0);
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -32,34 +32,31 @@ export default function Navbar() {
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="block h-8 w-auto lg:hidden"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
-                  <img
-                    className="hidden h-8 w-auto lg:block"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
-                </div>
+                <Link
+                  to="/"
+                  onClick={() => setcurrentPage(0)}
+                  className="text-white text-3xl font-bold flex items-center"
+                >
+                  <span className="text-blue-400">Ri</span>
+                  shop
+                </Link>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    {navigation.map((item) => (
-                      <a
+                    {navigation.map((item, i) => (
+                      <Link
                         key={item.name}
-                        href={item.href}
+                        to={item.href}
+                        onClick={() => setcurrentPage(i)}
                         className={classNames(
-                          item.current
+                          i === currentPage
                             ? "bg-gray-900 text-white"
                             : "text-gray-300 hover:bg-gray-700 hover:text-white",
                           "px-3 py-2 rounded-md text-sm font-medium"
                         )}
-                        aria-current={item.current ? "page" : undefined}
+                        // aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
