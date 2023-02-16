@@ -1,11 +1,14 @@
 import React from "react";
 import ProductList from "../components/Home/ProductList";
+import ClientLayout from "../layouts/ClientLayout";
 
 function Home() {
   return (
-    <div className="min-h-screen">
-      <ProductList />
-    </div>
+    <ClientLayout>
+      <div id="home-page">
+        <ProductList />
+      </div>
+    </ClientLayout>
   );
 }
 

@@ -6,7 +6,7 @@ function ClientLayout({ children }) {
   return (
     <div className="client-layout">
       <Navbar />
-      <div>{children}</div>
+      <div className="min-h-screen">{children}</div>
       <Footer />
     </div>
   );
