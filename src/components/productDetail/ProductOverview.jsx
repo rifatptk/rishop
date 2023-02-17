@@ -1,9 +1,12 @@
 import useGetData from "../../hooks/useGetData";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import RiSlider from "./RiSlider";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { StarIcon as StarOutlinedIcon } from "@heroicons/react/24/outline";
+import { useDispatch } from "react-redux";
+import { addItemsToCheckout } from "../../redux/features/checkout/checkoutSlice";
+import { addToCart } from "../../redux/features/cart/cartSlice";
 
 export default function ProductOverview() {
   const { productId } = useParams();
@@ -15,6 +18,15 @@ export default function ProductOverview() {
   } = useGetData({
     endpoint: `/products/${productId}`,
   });
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  function buyNow() {
+    dispatch(addItemsToCheckout([product]));
+    navigate("/checkout");
+  }
 
   function renderRating() {
     const ratings = new Array(Math.floor(product.rating)).fill(true);
@@ -118,10 +130,16 @@ export default function ProductOverview() {
               </div>
             </div>
             <div className="flex gap-5 mt-5">
-              <button className="bg-green-600 text-white font-bold px-5 py-2 rounded">
+              <button
+                onClick={buyNow}
+                className="bg-green-600 text-white font-bold px-5 py-2 rounded"
+              >
                 Buy now
               </button>
-              <button className="bg-blue-500 text-white font-bold px-5 py-2 rounded">
+              <button
+                onClick={() => dispatch(addToCart({ ...product, quantity: 1 }))}
+                className="bg-blue-500 text-white font-bold px-5 py-2 rounded"
+              >
                 Add to cart
               </button>
             </div>

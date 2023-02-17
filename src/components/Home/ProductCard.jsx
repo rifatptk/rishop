@@ -1,12 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { StarIcon as StarOutlinedIcon } from "@heroicons/react/24/outline";
 import { addToCart } from "../../redux/features/cart/cartSlice";
 import { useDispatch } from "react-redux";
+import { addItemsToCheckout } from "../../redux/features/checkout/checkoutSlice";
 
 export default function ProductCard({ product }) {
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  function buyNow() {
+    dispatch(addItemsToCheckout([product]));
+    navigate("/checkout");
+  }
+
   function renderRating() {
     const ratings = new Array(Math.floor(product.rating)).fill(true);
     while (ratings.length < 5) {
@@ -49,7 +58,10 @@ export default function ProductCard({ product }) {
         >
           Add to cart
         </button>
-        <button className="rounded bg-black/30 hover:bg-black/50 text-white backdrop-blur-sm px-2 py-1 text-sm">
+        <button
+          onClick={buyNow}
+          className="rounded bg-black/30 hover:bg-black/50 text-white backdrop-blur-sm px-2 py-1 text-sm"
+        >
           Buy now
         </button>
       </div>
