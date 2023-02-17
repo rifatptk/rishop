@@ -1,5 +1,13 @@
 import React from "react";
+import OrdersTable from "../../components/admin/OrdersTable";
+import AdminLayout from "../../layouts/AdminLayout";
 
 export default function Orders() {
-  return <div>Orders</div>;
+  return (
+    <AdminLayout>
+      <div id="products">
+        <OrdersTable />
+      </div>
+    </AdminLayout>
+  );
 }
