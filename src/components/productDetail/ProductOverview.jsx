@@ -9,6 +9,7 @@ import { addItemsToCheckout } from "../../redux/features/checkout/checkoutSlice"
 import { addToCart } from "../../redux/features/cart/cartSlice";
 
 export default function ProductOverview() {
+  const pathname = window.location.pathname;
   const { productId } = useParams();
 
   const {
@@ -129,20 +130,24 @@ export default function ProductOverview() {
                 </ul>
               </div>
             </div>
-            <div className="flex gap-5 mt-5">
-              <button
-                onClick={buyNow}
-                className="bg-green-600 text-white font-bold px-5 py-2 rounded"
-              >
-                Buy now
-              </button>
-              <button
-                onClick={() => dispatch(addToCart({ ...product, quantity: 1 }))}
-                className="bg-blue-500 text-white font-bold px-5 py-2 rounded"
-              >
-                Add to cart
-              </button>
-            </div>
+            {!pathname.includes("admin") && (
+              <div className="flex gap-5 mt-5">
+                <button
+                  onClick={buyNow}
+                  className="bg-green-600 text-white font-bold px-5 py-2 rounded"
+                >
+                  Buy now
+                </button>
+                <button
+                  onClick={() =>
+                    dispatch(addToCart({ ...product, quantity: 1 }))
+                  }
+                  className="bg-blue-500 text-white font-bold px-5 py-2 rounded"
+                >
+                  Add to cart
+                </button>
+              </div>
+            )}
 
             <div className="mt-10">
               <h2 className="text-sm font-medium text-gray-900">Details</h2>

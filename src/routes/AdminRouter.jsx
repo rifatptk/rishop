@@ -1,7 +1,20 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
+import Customers from "../pages/admin/Customers";
+import Orders from "../pages/admin/Orders";
+import Products from "../pages/admin/Products";
+import SingleProduct from "../pages/admin/SingleProduct";
 
 function AdminRouter() {
-  return <div>AdminRouter</div>;
+  return (
+    <Routes>
+      <Route index element={<Products />} />
+      <Route path="products" element={<Products />} />
+      <Route path="products/:productId" element={<SingleProduct />} />
+      <Route path="orders" element={<Orders />} />
+      <Route path="customers" element={<Customers />} />
+    </Routes>
+  );
 }
 
 export default AdminRouter;
