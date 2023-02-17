@@ -5,7 +5,7 @@ import ClientLayout from "../../layouts/ClientLayout";
 export default function ProductDetail() {
   return (
     <ClientLayout>
-      <div id="product-detail-page">
+      <div id="product-detail-page" className="pt-20">
         <ProductOverview />
       </div>
     </ClientLayout>

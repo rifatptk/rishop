@@ -5,7 +5,7 @@ import ClientLayout from "../../layouts/ClientLayout";
 export default function OrderPlaced() {
   return (
     <ClientLayout>
-      <div id="order-placed">
+      <div id="order-placed" className="pt-20">
         <div className="bg-gray-100 h-screen">
           <div className="bg-white p-6  md:mx-auto">
             <svg
