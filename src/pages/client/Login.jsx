@@ -1,11 +1,15 @@
 import { LockClosedIcon } from "@heroicons/react/20/solid";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { login } from "../../redux/features/auth/authSlice";
 
 export default function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   function doLogin(e) {
     e.preventDefault();
-    navigate("/");
+    dispatch(login({ phone: "01784254902", password: "12154" }));
+    // navigate("/");
   }
   return (
     <>

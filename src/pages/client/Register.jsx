@@ -1,8 +1,17 @@
 import { LockClosedIcon } from "@heroicons/react/24/outline";
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Register() {
+  const [credentials, setcredentials] = useState({
+    username: "",
+    phone: "",
+    password: "",
+  });
+  function onChangeHandler(e) {
+    setcredentials({ ...credentials, [e.target.name]: e.target.value });
+  }
+  console.log(credentials);
   const navigate = useNavigate();
   function doRegister(e) {
     e.preventDefault();
@@ -28,17 +37,33 @@ export default function Register() {
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
-                <label htmlFor="email-address" className="sr-only">
-                  Email address
+                <label htmlFor="username" className="sr-only">
+                  Username
                 </label>
                 <input
-                  id="email-address"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
+                  value={credentials.username}
+                  onChange={onChangeHandler}
+                  id="username"
+                  name="username"
+                  type="text"
                   required
                   className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  placeholder="Email address"
+                  placeholder="EX: rifatptk"
+                />
+              </div>
+              <div>
+                <label htmlFor="phone" className="sr-only">
+                  Phone
+                </label>
+                <input
+                  value={credentials.phone}
+                  onChange={onChangeHandler}
+                  id="phone"
+                  name="phone"
+                  type="phone"
+                  required
+                  className="relative block w-full appearance-none rounded-none  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                  placeholder="EX: 01614729335"
                 />
               </div>
               <div>
@@ -46,10 +71,11 @@ export default function Register() {
                   Password
                 </label>
                 <input
+                  value={credentials.password}
+                  onChange={onChangeHandler}
                   id="password"
                   name="password"
                   type="password"
-                  autoComplete="current-password"
                   required
                   className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   placeholder="Password"
