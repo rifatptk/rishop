@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const cartSlice = createSlice({
   name: "cart",
@@ -11,6 +12,7 @@ const cartSlice = createSlice({
       const item = action.payload;
       const existingItem = state.items.find((i) => i.id === item.id);
       if (existingItem) {
+        toast.error(`"${item.title}" already added!`);
         return;
       } else {
         state.items.push(item);
@@ -19,6 +21,7 @@ const cartSlice = createSlice({
     removeFromCart: (state, action) => {
       const id = action.payload;
       state.items = state.items.filter((i) => i.id !== id);
+      toast.info("Item removed from cart!");
     },
     incrementQuantity: (state, action) => {
       const { productId } = action.payload;
@@ -40,6 +43,7 @@ const cartSlice = createSlice({
     },
     clearCart: (state) => {
       state.items = [];
+      toast.info("Cart cleared!");
     },
     toggleCart: (state) => {
       state.isOpen = !state.isOpen;
