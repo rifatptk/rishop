@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import useGetData from "../../hooks/useGetData";
 
-export default function ProductsTable() {
+export default function CustomersTable() {
   const { data, isLoading, error } = useGetData({
-    title: "Products",
-    endpoint: "/products",
+    title: "Users",
+    endpoint: "/users",
   });
+  console.log(data?.users[0]);
 
   if (isLoading) {
     return (
@@ -29,12 +30,12 @@ export default function ProductsTable() {
   }
   return (
     <>
-      <h1 className="text-2xl font-bold text-gray-600 py-5">Products</h1>
+      <h1 className="text-2xl font-bold text-gray-600 py-5">Customers</h1>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              {["Product name", "Brand", "Category", "Price"].map((el) => (
+              {["Customer", "Email", "Phone", "Gender"].map((el) => (
                 <th key={el} scope="col" className="px-6 py-3">
                   {el}
                 </th>
@@ -47,23 +48,28 @@ export default function ProductsTable() {
           </thead>
 
           <tbody>
-            {data.products?.slice(0, 10).map((product) => (
+            {data.users?.slice(0, 10).map((customer) => (
               <tr
-                key={product.id}
+                key={customer.id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
                 <th
                   scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  className="px-6 flex gap-2 items-center py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {product.title}
+                  <img
+                    className="w-10 h-10 rounded-full object-cover border"
+                    src={customer.image}
+                    alt={customer.firstname}
+                  />
+                  <span>{`${customer.firstName} ${customer.lastName}`}</span>
                 </th>
-                <td className="px-6 py-4">{product.brand}</td>
-                <td className="px-6 py-4">{product.category}</td>
-                <td className="px-6 py-4">${product.price}</td>
+                <td className="px-6 py-4">{customer.email}</td>
+                <td className="px-6 py-4">{customer.phone}</td>
+                <td className="px-6 py-4">${customer.gender}</td>
                 <td className="px-6 py-4 text-right">
                   <Link
-                    to={`/admin/products/${product.id}`}
+                    to={`/admin/customers/${customer.id}`}
                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                   >
                     View

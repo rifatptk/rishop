@@ -13,6 +13,7 @@ function AdminRouter() {
       <Route path="products/:productId" element={<SingleProduct />} />
       <Route path="orders" element={<Orders />} />
       <Route path="customers" element={<Customers />} />
+      <Route path="customers/:customerId" element={<h1>Single Customer</h1>} />
     </Routes>
   );
 }
