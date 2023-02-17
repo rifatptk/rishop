@@ -1,15 +1,29 @@
 import { LockClosedIcon } from "@heroicons/react/20/solid";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../redux/features/auth/authSlice";
 
 export default function Login() {
   const navigate = useNavigate();
+  const isAuth = useSelector((state) => state.auth.isAuth);
+  useEffect(() => {
+    if (isAuth) {
+      navigate("/");
+    }
+  }, [isAuth, navigate]);
+
+  const [credentials, setcredentials] = useState({
+    phone: "",
+    password: "",
+  });
+  function onChangeHandler(e) {
+    setcredentials({ ...credentials, [e.target.name]: e.target.value });
+  }
   const dispatch = useDispatch();
   function doLogin(e) {
     e.preventDefault();
-    dispatch(login({ phone: "01784254902", password: "12154" }));
-    // navigate("/");
+    dispatch(login(credentials));
   }
   return (
     <>
@@ -31,17 +45,19 @@ export default function Login() {
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
-                <label htmlFor="email-address" className="sr-only">
-                  Email address
+                <label htmlFor="phone" className="sr-only">
+                  Phone
                 </label>
                 <input
-                  id="email-address"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
+                  value={credentials.phone}
+                  onChange={onChangeHandler}
+                  id="phone"
+                  name="phone"
+                  type="phone"
+                  autoComplete="phone"
                   required
                   className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                  placeholder="Email address"
+                  placeholder="phone"
                 />
               </div>
               <div>
@@ -49,10 +65,11 @@ export default function Login() {
                   Password
                 </label>
                 <input
+                  value={credentials.password}
+                  onChange={onChangeHandler}
                   id="password"
                   name="password"
                   type="password"
-                  autoComplete="current-password"
                   required
                   className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   placeholder="Password"

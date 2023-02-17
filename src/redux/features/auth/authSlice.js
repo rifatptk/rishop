@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const users = [
@@ -32,11 +33,14 @@ const authSlice = createSlice({
       }
 
       users.push({ phone, password, username, role: "user", avatar: null });
+      localStorage.setItem("users", JSON.stringify(users));
+
       state.isAuth = true;
       state.role = "user";
       state.user = { phone, password, username, role: "user", avatar: null };
       toast.success("Registration successfull!");
     },
+
     login: (state, action) => {
       const { phone, password } = action.payload;
       const users = JSON.parse(localStorage.getItem("users"));
@@ -52,20 +56,20 @@ const authSlice = createSlice({
         state.isAuth = true;
         state.role = user.role;
         state.user = user;
+      } else {
+        toast.error("Invalid credentials!");
       }
     },
     logout: (state, action) => {
       state.isAuth = false;
       state.user = null;
       state.role = "user";
+      redirect("/login");
     },
-    checkToken: (state) => {
-      state.items = [];
-      state.Info = null;
-    },
+    checkToken: (state) => {},
   },
 });
 
-export const { login, logout, checkToken } = authSlice.actions;
+export const { register, login, logout, checkToken } = authSlice.actions;
 
 export default authSlice.reducer;

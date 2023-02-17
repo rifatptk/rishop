@@ -1,21 +1,33 @@
 import { LockClosedIcon } from "@heroicons/react/24/outline";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { register } from "../../redux/features/auth/authSlice";
 
 export default function Register() {
+  const navigate = useNavigate();
+  const isAuth = useSelector((state) => state.auth.isAuth);
+  useEffect(() => {
+    if (isAuth) {
+      navigate("/");
+    }
+  }, [isAuth, navigate]);
+
   const [credentials, setcredentials] = useState({
     username: "",
     phone: "",
     password: "",
   });
+
   function onChangeHandler(e) {
     setcredentials({ ...credentials, [e.target.name]: e.target.value });
   }
-  console.log(credentials);
-  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
   function doRegister(e) {
     e.preventDefault();
-    navigate("/");
+    dispatch(register(credentials));
   }
   return (
     <>
@@ -45,6 +57,8 @@ export default function Register() {
                   onChange={onChangeHandler}
                   id="username"
                   name="username"
+                  minLength={4}
+                  maxLength={20}
                   type="text"
                   required
                   className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -56,6 +70,7 @@ export default function Register() {
                   Phone
                 </label>
                 <input
+                  pattern="(^([+]{1}[8]{2}|0088)?(01){1}[3-9]{1}\d{8})$"
                   value={credentials.phone}
                   onChange={onChangeHandler}
                   id="phone"
@@ -76,6 +91,8 @@ export default function Register() {
                   id="password"
                   name="password"
                   type="password"
+                  minLength={6}
+                  maxLength={16}
                   required
                   className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                   placeholder="Password"
