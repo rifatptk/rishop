@@ -9,7 +9,8 @@ import {
   removeFromCart,
   toggleCart,
 } from "../../redux/features/cart/cartSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { addItemsToCheckout } from "../../redux/features/checkout/checkoutSlice";
 
 export default function ShoppingCart() {
   // const [open, setOpen] = useState(true);
@@ -21,6 +22,13 @@ export default function ShoppingCart() {
   }, 0);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  function doCheckout() {
+    dispatch(addItemsToCheckout(cartItems));
+    dispatch(toggleCart());
+    navigate("/checkout");
+  }
 
   return (
     <Transition.Root show={isOpen} as={Fragment}>
@@ -187,13 +195,12 @@ export default function ShoppingCart() {
                           Shipping and taxes calculated at checkout.
                         </p>
                         <div className="mt-6">
-                          <Link
-                            onClick={() => dispatch(toggleCart())}
-                            to="/checkout"
-                            className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                          <div
+                            onClick={doCheckout}
+                            className="flex items-center justify-center cursor-pointer rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                           >
                             Checkout
-                          </Link>
+                          </div>
                         </div>
                         <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                           <p>

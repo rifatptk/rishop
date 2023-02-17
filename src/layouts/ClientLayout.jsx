@@ -5,7 +5,7 @@ import Navbar from "../components/common/Navbar";
 
 function ClientLayout({ children }) {
   return (
-    <div className="client-layout">
+    <div id="client-layout">
       <Navbar />
       <ShoppingCart />
       <div className="min-h-screen">{children}</div>

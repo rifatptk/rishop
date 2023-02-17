@@ -104,7 +104,6 @@ const cartSlice = createSlice({
     },
     clearCart: (state) => {
       state.items = [];
-      toast.info("Cart cleared!");
     },
     toggleCart: (state) => {
       state.isOpen = !state.isOpen;
