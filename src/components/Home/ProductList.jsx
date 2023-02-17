@@ -7,7 +7,7 @@ export default function ProductList() {
     title: "Products",
     endpoint: "/products",
   });
-  console.log({ data, isLoading, error });
+
   if (isLoading) {
     return (
       <div className="h-screen grid place-items-center">

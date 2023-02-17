@@ -5,12 +5,6 @@ import RiSlider from "./RiSlider";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { StarIcon as StarOutlinedIcon } from "@heroicons/react/24/outline";
 
-const reviews = { href: "#", average: 4, totalCount: 117 };
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default function ProductOverview() {
   const { productId } = useParams();
 
@@ -37,6 +31,7 @@ export default function ProductOverview() {
       </div>
     );
   }
+
   if (isLoading) {
     return (
       <div className="h-screen grid place-items-center">
@@ -84,12 +79,9 @@ export default function ProductOverview() {
               <div className="flex items-center">
                 {renderRating()}
                 <p className="sr-only">{product.rating} out of 5 stars</p>
-                <a
-                  href={reviews.href}
-                  className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                >
+                <p className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
                   237
-                </a>
+                </p>
               </div>
             </div>
           </div>

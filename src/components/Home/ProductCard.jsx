@@ -2,8 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { StarIcon as StarOutlinedIcon } from "@heroicons/react/24/outline";
+import { addToCart } from "../../redux/features/cart/cartSlice";
+import { useDispatch } from "react-redux";
 
 export default function ProductCard({ product }) {
+  const dispatch = useDispatch();
   function renderRating() {
     const ratings = new Array(Math.floor(product.rating)).fill(true);
     while (ratings.length < 5) {
@@ -40,10 +43,13 @@ export default function ProductCard({ product }) {
         <p className="text-sm font-medium text-gray-900">${product.price}</p>
       </Link>
       <div className="absolute top-2 right-2 space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
-        <button className="rounded bg-black/30 text-white backdrop-blur-sm px-2 py-1 text-sm">
+        <button
+          onClick={() => dispatch(addToCart({ ...product, quantity: 1 }))}
+          className="rounded bg-black/30 hover:bg-black/50 text-white backdrop-blur-sm px-2 py-1 text-sm"
+        >
           Add to cart
         </button>
-        <button className="rounded bg-black/30 text-white backdrop-blur-sm px-2 py-1 text-sm">
+        <button className="rounded bg-black/30 hover:bg-black/50 text-white backdrop-blur-sm px-2 py-1 text-sm">
           Buy now
         </button>
       </div>
