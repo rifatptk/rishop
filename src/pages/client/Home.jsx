@@ -1,6 +1,6 @@
 import React from "react";
-import ProductList from "../components/Home/ProductList";
-import ClientLayout from "../layouts/ClientLayout";
+import ProductList from "../../components/Home/ProductList";
+import ClientLayout from "../../layouts/ClientLayout";
 
 function Home() {
   return (

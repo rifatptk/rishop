@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import NotFound from "../pages/NotFound";
+import NotFound from "../pages/client/NotFound";
 import AdminRouter from "./AdminRouter";
 import ClientRouter from "./ClientRouter";
 
