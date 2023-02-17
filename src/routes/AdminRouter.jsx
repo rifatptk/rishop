@@ -4,6 +4,7 @@ import Customers from "../pages/admin/Customers";
 import Orders from "../pages/admin/Orders";
 import Products from "../pages/admin/Products";
 import SingleProduct from "../pages/admin/SingleProduct";
+import CustomerDetail from "../pages/admin/CustomerDetail";
 
 function AdminRouter() {
   return (
@@ -13,7 +14,7 @@ function AdminRouter() {
       <Route path="products/:productId" element={<SingleProduct />} />
       <Route path="orders" element={<Orders />} />
       <Route path="customers" element={<Customers />} />
-      <Route path="customers/:customerId" element={<h1>Single Customer</h1>} />
+      <Route path="customers/:customerId" element={<CustomerDetail />} />
     </Routes>
   );
 }
