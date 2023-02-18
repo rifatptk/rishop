@@ -4,6 +4,74 @@ Rishop is a simple e-commerce web application (client-side and admin dashboard).
 
 > Products, Orders and Customers data are fetched from [DummyJSON](https://dummyjson.com).
 
+**[Live Preview](https://rishop.vercel.app)**
+
+## Authentication:
+
+I've made a simple custom authentication system using localStorage.
+
+> _I have added an admin and a non-admin user account to help on your testing_
+
+**Credentials**:
+
+- Admin account: `phone: 01784254902, password: pass1234`
+- Non-admin account: `phone: 01614729335, password: pass1234`
+
+**Authentication features:**
+
+- Register and sign-in
+- User can't add to cart or buy products without an account
+- Role based authorization
+- Normal user can't access admin dashboard
+
+**Authentication process**:
+
+Initially I've create a users list and storing it to the localStorage to test the application (An Admin and a normal user).
+However if users list is already exists in localstorage I am skipping this step.
+
+The authentication process is pretty simple:
+
+- Read users list from localStorage
+- Check if user exists or not with given credentials
+- Compare user's credentials with given credentials
+- If credentials matches let the user log in to the site, else show an exception
+
+The registration process is also very simple:
+
+- Read users list from localStorage
+- Check if user already exists or not with given credentials
+- If user dosen't already exist, create user with given credentials
+- Add newly create user to the user's list and resave users list in localStorage
+
+## Project navigation
+
+> **Note:** Application flow is working fine and its user-friendly. This section is added to help on additional testing.
+
+**Auth**:
+
+- `/register`: Register form
+- `/login`: Login form
+
+**Client**:
+
+- `/*`: Client-side routes (fully navigateable)
+- `/`: Homepage
+- `/checkout`: Checkout page
+- `/order-placed`: Order placed page
+
+**Admin**:
+
+- `/admin/*`: Admin dashboard routes (fully navigateable)
+- `/admin`: Admin dashboard home
+- `/admin/products`: Product's table
+- `/admin/products/:productId`: Product detail
+- `/admin/products/add`: Add product form
+- `/admin/orders`: Order's table
+- `/admin/orders/:orderId`: Order detail
+- `/admin/customers`: Customer's table
+- `/admin/customer/:customerId`: Customer detail
+- `/admin/customer/add`: Add customer form
+
 ## Dependencies and technologies
 
 ```JSON
@@ -34,59 +102,51 @@ Rishop is a simple e-commerce web application (client-side and admin dashboard).
   }
 ```
 
-## Project navigation
-
-> **Note:** Application flow is working fine and its user-friendly. This section is added to help on additional testing.
-
-**Client**:
-
-- `/*`: Client-side routes (fully navigateable)
-- `/`: Homepage
-- `/register`: Register form
-- `/login`: Login form
-- `/checkout`: Checkout page
-- `/order-placed`: Order placed page
-
-**Admin**:
-
-- `/admin/*`: Admin dashboard routes (fully navigateable)
-- `/admin`: Admin dashboard home
-- `/admin/products`: Product's table
-- `/admin/products/:productId`: Product detail
-- `/admin/orders`: Order's table
-- `/admin/orders/:orderId`: Order detail
-- `/admin/customers`: Customer's table
-- `/admin/customer/:customerId`: Customer detail
-
 ## Project screenshots
 
 ### Register
 
 ![register](./public/screenshots/register.png)
 
-### Sign-in
+### Login
 
-![register](./public/screenshots/signin.png)
+![login](./public/screenshots/login.png)
 
 ### Home / products
 
-![register](./public/screenshots/home.png)
+![home](./public/screenshots/home.png)
 
 ### Product detail
 
-![register](./public/screenshots/product-detail.png)
+![product-detail](./public/screenshots/product-detail.png)
 
 ### Cart
 
-![register](./public/screenshots/cart.png)
+![cart](./public/screenshots/cart.png)
 
 ### Checkout
 
-![register](./public/screenshots/checkout.png)
+![checkout](./public/screenshots/checkout.png)
+
+### Order placed
+
+![order-placed](./public/screenshots/order-placed.png)
+
+### Admin: products
+
+![admin-products](./public/screenshots/admin-products.png)
+
+### Admin: order detail
+
+![orders](./public/screenshots/admin-order-detail.png)
 
 ### Admin: customers
 
-![register](./public/screenshots/customers.png)
+![customer](./public/screenshots/admin-customer.png)
+
+### Admin: customer detail
+
+![customer](./public/screenshots/admin-customer-detail.png)
 
 ## Project structure
 

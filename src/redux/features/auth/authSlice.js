@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-
+import img from "../../../../public/images/rifatptk.png";
 /*
- I've made a simple custom authentication system using localStorage
 
- Initially I've create a users list and storing it to the localStorage (because at least 1 admin is needed to access admin dashboard).
+Authentication:
+ I've made a simple custom authentication system using localStorage.
+
+ Initially I've create a users list and storing it to the localStorage to test the application (An Admin and a normal user).
  However if users list is already exists in localstorage I am skipping this step.
 
 The authentication process is pretty simple here.
@@ -28,14 +30,14 @@ const users = [
     username: "rifatptk",
     phone: "01784254902",
     password: "pass1234",
-    avatar: "images/rifatptk.png",
+    avatar: "../../../../public/images/rifatptk.png",
     role: "admin",
   },
   {
     username: "user",
     phone: "01614729335",
     password: "pass1234",
-    avatar: "images/user.jpeg",
+    avatar: "../../../../public/images/user.jpeg",
     role: "user",
   },
 ];
