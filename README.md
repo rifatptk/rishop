@@ -6,6 +6,8 @@ Rishop is a simple e-commerce web application (client-side and admin dashboard).
 
 **[Live Preview](https://rishop.vercel.app)**
 
+**[Github Link](https://github.com/rifatptk/rishop)**
+
 ## Authentication:
 
 I've made a simple custom authentication system using localStorage.

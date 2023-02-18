@@ -20,8 +20,6 @@ The registration process is also very simple
 - Check if user already exists or not with given credentials
 - If user dosen't already exist, create user with given credentials
 - Add newly create user to the user's list and resave users list in localStorage
-
-
 */
 
 // initial users list
@@ -30,14 +28,14 @@ const users = [
     username: "rifatptk",
     phone: "01784254902",
     password: "pass1234",
-    avatar: "../../../../public/images/rifatptk.png",
+    avatar: "images/rifatptk.png",
     role: "admin",
   },
   {
     username: "user",
     phone: "01614729335",
     password: "pass1234",
-    avatar: "../../../../public/images/user.jpeg",
+    avatar: "images/user.jpeg",
     role: "user",
   },
 ];
