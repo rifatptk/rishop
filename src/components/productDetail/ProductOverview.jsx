@@ -4,9 +4,10 @@ import { HashLoader } from "react-spinners";
 import RiSlider from "./RiSlider";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { StarIcon as StarOutlinedIcon } from "@heroicons/react/24/outline";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItemsToCheckout } from "../../redux/features/checkout/checkoutSlice";
 import { addToCart } from "../../redux/features/cart/cartSlice";
+import { toast } from "react-toastify";
 
 export default function ProductOverview() {
   const pathname = window.location.pathname;
@@ -23,12 +24,28 @@ export default function ProductOverview() {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+  const isAuth = useSelector((state) => state.auth.isAuth);
 
+  // Function executed when add to cart button clicked
+  function addToCartFn() {
+    if (!isAuth) {
+      toast.error("Login required");
+      return;
+    }
+    dispatch(addToCart({ ...product, quantity: 1 }));
+  }
+
+  // Function executed when buy now button clicked
   function buyNow() {
+    if (!isAuth) {
+      toast.error("Login required");
+      return navigate("/login");
+    }
     dispatch(addItemsToCheckout([product]));
     navigate("/checkout");
   }
 
+  // Renders ratings
   function renderRating() {
     const ratings = new Array(Math.floor(product.rating)).fill(true);
     while (ratings.length < 5) {
@@ -139,9 +156,7 @@ export default function ProductOverview() {
                   Buy now
                 </button>
                 <button
-                  onClick={() =>
-                    dispatch(addToCart({ ...product, quantity: 1 }))
-                  }
+                  onClick={addToCartFn}
                   className="bg-blue-500 text-white font-bold px-5 py-2 rounded"
                 >
                   Add to cart

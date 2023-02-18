@@ -41,8 +41,12 @@ export default function Navbar() {
                   )}
                 </button>
                 {!auth.isAuth && (
-                  <Link to="/login" className="bg-white/20 rounded-full p-2">
-                    <UserIcon className="w-6 text-white" />
+                  <Link
+                    to="/login"
+                    className="bg-white/20 flex gap-2 ml-4 text-white rounded-md py-2 px-3"
+                  >
+                    <span>Login</span>
+                    <UserIcon className="w-6" />
                   </Link>
                 )}
 

@@ -1,6 +1,8 @@
 # Rishop
 
-Rishop is a simple e-commerce web application (client side and admin dashboard).
+Rishop is a simple e-commerce web application (client-side and admin dashboard).
+
+> Products, Orders and Customers data are fetched from [DummyJSON](https://dummyjson.com).
 
 ## Dependencies and technologies
 

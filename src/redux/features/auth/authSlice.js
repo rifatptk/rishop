@@ -21,6 +21,11 @@ const authSlice = createSlice({
     role: "user",
   },
   reducers: {
+    setAuth: (state, action) => {
+      state.isAuth = true;
+      state.user = action.payload;
+      state.role = action.payload.role;
+    },
     register: (state, action) => {
       const { phone, password, username } = action.payload;
       const users = JSON.parse(localStorage.getItem("users"));
@@ -56,6 +61,7 @@ const authSlice = createSlice({
         state.isAuth = true;
         state.role = user.role;
         state.user = user;
+        // localStorage.setItem("auth",)
       } else {
         toast.error("Invalid credentials!");
       }

@@ -3,7 +3,6 @@ import {
   ShoppingBagIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/outline";
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const iconClass = "w-6";
@@ -27,7 +26,6 @@ const sidebarLinks = [
 ];
 
 export default function Sidebar() {
-  const [selected, setselected] = useState(0);
   return (
     <div id="sidebar" className="">
       <div>
@@ -38,10 +36,7 @@ export default function Sidebar() {
                 <li key={link.title}>
                   <Link
                     to={link.to}
-                    onClick={() => setselected(i)}
-                    className={`flex items-center p-2 text-base font-normal text-gray-50 rounded-lg hover:bg-gray-700 ${
-                      selected === i ? "bg-gray-700" : ""
-                    }`}
+                    className={`flex items-center p-2 text-base font-normal text-gray-50 rounded-lg hover:bg-gray-700`}
                   >
                     {link.icon}
                     <span className="ml-3">{link.title}</span>

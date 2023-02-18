@@ -3,19 +3,36 @@ import { Link, useNavigate } from "react-router-dom";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { StarIcon as StarOutlinedIcon } from "@heroicons/react/24/outline";
 import { addToCart } from "../../redux/features/cart/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItemsToCheckout } from "../../redux/features/checkout/checkoutSlice";
+import { toast } from "react-toastify";
 
 export default function ProductCard({ product }) {
   const dispatch = useDispatch();
+  const isAuth = useSelector((state) => state.auth.isAuth);
 
   const navigate = useNavigate();
 
+  // Function executed when add to cart button clicked
+  function addToCartFn() {
+    if (!isAuth) {
+      toast.error("Login required");
+      return;
+    }
+    dispatch(addToCart({ ...product, quantity: 1 }));
+  }
+
+  // Function executed when buy now button clicked
   function buyNow() {
+    if (!isAuth) {
+      toast.error("Login required");
+      return navigate("/login");
+    }
     dispatch(addItemsToCheckout([product]));
     navigate("/checkout");
   }
 
+  // Renders ratings
   function renderRating() {
     const ratings = new Array(Math.floor(product.rating)).fill(true);
     while (ratings.length < 5) {
@@ -53,7 +70,7 @@ export default function ProductCard({ product }) {
       </Link>
       <div className="absolute top-2 right-2 space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
         <button
-          onClick={() => dispatch(addToCart({ ...product, quantity: 1 }))}
+          onClick={addToCartFn}
           className="rounded bg-black/30 hover:bg-black/50 text-white backdrop-blur-sm px-2 py-1 text-sm"
         >
           Add to cart

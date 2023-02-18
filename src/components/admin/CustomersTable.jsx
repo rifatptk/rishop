@@ -8,7 +8,6 @@ export default function CustomersTable() {
     title: "Users",
     endpoint: "/users",
   });
-  console.log(data?.users[0]);
 
   if (isLoading) {
     return (
@@ -30,7 +29,15 @@ export default function CustomersTable() {
   }
   return (
     <>
-      <h1 className="text-2xl font-bold text-gray-600 py-5">Customers</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-2xl font-bold text-gray-600 py-5">Customers</h1>
+        <Link
+          to="/admin/customers/add"
+          className="text-white bg-blue-500 hover:bg-blue-400 rounded px-3 py-1"
+        >
+          Add customer
+        </Link>
+      </div>{" "}
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

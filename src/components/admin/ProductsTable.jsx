@@ -29,7 +29,16 @@ export default function ProductsTable() {
   }
   return (
     <>
-      <h1 className="text-2xl font-bold text-gray-600 py-5">Products</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-2xl font-bold text-gray-600 py-5">Products</h1>
+        <Link
+          to="/admin/products/add"
+          className="text-white bg-blue-500 hover:bg-blue-400 rounded px-3 py-1"
+        >
+          Add product
+        </Link>
+      </div>
+
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
