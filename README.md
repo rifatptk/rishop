@@ -152,22 +152,28 @@ The registration process is also very simple:
 
 ## Project structure
 
-```.
+```
 ├── index.html
 ├── ls.txt
 ├── package.json
 ├── postcss.config.cjs
 ├── public
 │   ├── images
-│   │   └── rifatptk.png
+│   │   ├── avatar.png
+│   │   ├── rifatptk.png
+│   │   └── user.jpeg
 │   ├── screenshots
+│   │   ├── admin-customer-detail.png
+│   │   ├── admin-customer.png
+│   │   ├── admin-order-detail.png
+│   │   ├── admin-products.png
 │   │   ├── cart.png
 │   │   ├── checkout.png
-│   │   ├── customers.png
 │   │   ├── home.png
+│   │   ├── login.png
+│   │   ├── order-placed.png
 │   │   ├── product-detail.png
-│   │   ├── register.png
-│   │   └── signin.png
+│   │   └── register.png
 │   └── vite.svg
 ├── README.md
 ├── src
@@ -196,7 +202,8 @@ The registration process is also very simple:
 │   │       ├── ProductOverview.jsx
 │   │       └── RiSlider.jsx
 │   ├── hooks
-│   │   └── useGetData.js
+│   │   ├── useGetData.js
+│   │   └── useIsAdmin.js
 │   ├── index.css
 │   ├── layouts
 │   │   ├── AdminLayout.jsx
@@ -204,6 +211,8 @@ The registration process is also very simple:
 │   ├── main.jsx
 │   ├── pages
 │   │   ├── admin
+│   │   │   ├── AddCustomer.jsx
+│   │   │   ├── AddProduct.jsx
 │   │   │   ├── CustomerDetail.jsx
 │   │   │   ├── Customers.jsx
 │   │   │   ├── OrderDetail.jsx
@@ -231,13 +240,14 @@ The registration process is also very simple:
 │   └── routes
 │       ├── AdminRouter.jsx
 │       ├── ClientRouter.jsx
+│       ├── PrivateRoute.jsx
 │       └── Router.jsx
 ├── tailwind.config.cjs
 ├── vercel.json
 ├── vite.config.js
 └── yarn.lock
 
-23 directories, 60 files
+23 directories, 70 files
 ```
 
 # Getting Started
