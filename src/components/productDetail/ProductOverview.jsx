@@ -41,7 +41,7 @@ export default function ProductOverview() {
       toast.error("Login required");
       return navigate("/login");
     }
-    dispatch(addItemsToCheckout([product]));
+    dispatch(addItemsToCheckout([{ ...product, quantity: 1 }]));
     navigate("/checkout");
   }
 

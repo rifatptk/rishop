@@ -28,7 +28,7 @@ export default function ProductCard({ product }) {
       toast.error("Login required");
       return navigate("/login");
     }
-    dispatch(addItemsToCheckout([product]));
+    dispatch(addItemsToCheckout([{ ...product, quantity: 1 }]));
     navigate("/checkout");
   }
 
@@ -68,7 +68,7 @@ export default function ProductCard({ product }) {
         </div>
         <p className="text-sm font-medium text-gray-900">${product.price}</p>
       </Link>
-      <div className="absolute top-2 right-2 space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+      <div className="absolute top-2 right-2 space-x-2 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity">
         <button
           onClick={addToCartFn}
           className="rounded bg-black/30 hover:bg-black/50 text-white backdrop-blur-sm px-2 py-1 text-sm"
